@@ -1,4 +1,5 @@
-Extension zur Abfrage der zamn-Datenbank mit der Mathemaik-Nachlässen.
+Extension zur Einbindung der zamn-Datenbank mit Mathematik-Nachlässen.
 
-Nicht konfigurierbar; zamn liefert fertige html-Schnipsel. 
+Nicht konfigurierbar; zamn liefert fertige html-Schnipsel.
 
+Genutzt auf http://vifamath.de/historische-mathematik/liste-der-nachlaesse/
