@@ -49,47 +49,36 @@ class tx_zamn_pi1 extends tslib_pibase {
 		$this->conf=$conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-	        $this->pi_USER_INT_obj=1;	
-                $lang = array(
-		0 => "de",
-		1 => "en"
+	    $this->pi_USER_INT_obj=1;
+        $lang = array(
+			0 => "de",
+			1 => "en"
 		);
-		
-		$listUrl='http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/wor
-ds=Mathematik/dsp=zamn/nh=2';
-		$itemUrl='http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
 
-                //show item
-                if (isset($_GET["reccheck"])){
-	        //t3lib_div::debug($_SERVER["QUERY_STRING"]);	
-		$content=@file_get_contents($itemUrl."&".$_SERVER["QUERY_STRING"]);
-		//t3lib_div::debug($content);
-		$start=strpos($content, '<p');
-		//$content = strip_tags($content, '<p><div>');
-		$content = substr($content, $start);
-		$content = strip_tags($content, '<p><div><a><table><tr><td>');
-				
-		//content="YEP";
-                }
-                else {
-                //show list
-                $listUrl='http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/words=Mathematik/dsp=zamn/nh=2';
-
-		//t3lib_div::debug($baseUrl);
-		$listUrl .='&lang='.$lang[$GLOBALS["TSFE"]->sys_language_uid];
-		//t3lib_div::debug($listUrl);
-                $content="<h4>Collections</h4>" . @file_get_contents($listUrl);
-		$content=str_replace("show.html", "historische-mathematik/nachlaesse/", $content);
-		//t3lib_div::debug($content);
-
-		$content = preg_replace('/<\/OL>...<OL>/','</OL><h4>Personal</h4><OL>', $content);
-		$content = str_replace('?t_show', '?L=' .$GLOBALS["TSFE"]->sys_language_uid . '&t_show', $content);
-
-
+		//show item
+        if (isset($_GET["reccheck"])){
+			$itemUrl='http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
+			$itemUrl.="&".$_SERVER["QUERY_STRING"];
+			$content= file_get_contents($itemUrl);
+			$start=strpos($content, '<p');
+			$content = substr($content, $start);
+			$content = strip_tags($content, '<p><div><a><table><tr><td>');
+        }
+        else {
+			//show list
+			$listUrl='http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/words=Mathematik/dsp=zamn/nh=2';
+			$listUrl .='&lang='.$lang[$GLOBALS["TSFE"]->sys_language_uid];
+			$URLContent = file_get_contents($listUrl);
+            $content="<h4>Collections</h4>" . $URLContent;
+			$content=str_replace("show.html", "historische-mathematik/nachlaesse/", $content);
+			$content = preg_replace('/<\/OL>...<OL>/','</OL><h4>Personal</h4><OL>', $content);
+			$content = str_replace('?t_show', '?L=' .$GLOBALS["TSFE"]->sys_language_uid . '&t_show', $content);
 		}
+
 		return $this->pi_wrapInBaseClass($content);
-		
 	}
+
+
 }
 
 
