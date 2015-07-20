@@ -25,70 +25,67 @@
 /**
  * Plugin 'zamn' for the 'zamn' extension.
  */
-class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
+class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
+{
 
-	/**
-	 * @var string
-	 */
-	public $prefixId = 'tx_zamn_pi1';
+    /**
+     * @var string
+     */
+    public $prefixId = 'tx_zamn_pi1';
 
-	/**
-	 * @var string
-	 */
-	public $scriptRelPath = 'pi1/class.tx_zamn_pi1.php';
+    /**
+     * @var string
+     */
+    public $scriptRelPath = 'pi1/class.tx_zamn_pi1.php';
 
-	/**
-	 * @var string
-	 */
-	public $extKey = 'zamn';
+    /**
+     * @var string
+     */
+    public $extKey = 'zamn';
 
-	/**
-	 * @var bool
-	 */
-	public $pi_checkCHash = false;
+    /**
+     * @var bool
+     */
+    public $pi_checkCHash = false;
 
-	/**
-	 * The main method of the PlugIn
-	 *
-	 * @param string $content The PlugIn content
-	 * @param array $conf The PlugIn configuration
-	 * @return string The content that is displayed on the website
-	 */
-	public function main($content, $conf) {
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		$this->pi_loadLL();
-		$this->pi_USER_INT_obj = 1;
-		$lang = [
-			0 => 'de',
-			1 => 'en'
-		];
+    /**
+     * The main method of the PlugIn
+     *
+     * @param string $content The PlugIn content
+     * @param array $conf The PlugIn configuration
+     * @return string The content that is displayed on the website
+     */
+    public function main($content, $conf)
+    {
+        $this->conf = $conf;
+        $this->pi_setPiVarDefaults();
+        $this->pi_loadLL();
+        $this->pi_USER_INT_obj = true;
 
-		//show item
-		if (isset($_GET["reccheck"])) {
-			$itemUrl = 'http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
-			$itemUrl .= "&" . $_SERVER["QUERY_STRING"];
-			$content = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($itemUrl);
-			$start = strpos($content, '<p');
-			$content = substr($content, $start);
-			$content = strip_tags($content, '<p><div><a><table><tr><td>');
-		} else {
-			//show list
-			$listUrl = 'http://ssgfi1.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/words=Mathematik/dsp=zamn/nh=2';
-			$listUrl .= '&lang=' . $lang[$GLOBALS["TSFE"]->sys_language_uid];
-			$URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
-			$content = "<h4>Collections</h4>" . $URLContent;
-			$content = str_replace("show.html", "historische-mathematik/nachlaesse/", $content);
-			$content = preg_replace('/<\/OL>...<OL>/', '</OL><h4>Personal</h4><OL>', $content);
-			$content = str_replace('?t_show', '?L=' . $GLOBALS["TSFE"]->sys_language_uid . '&t_show', $content);
-		}
+        //show item
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('reccheck')) {
+            $itemUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
+            $itemUrl .= '&' . $_SERVER['QUERY_STRING'];
+            $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($itemUrl);
+            $start = strpos($content, '<p');
+            $content = substr($content, $start);
+            $content = strip_tags($content, '<p><div><a><table><tr><td>');
+        } else {
+            //show list
+            $listUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/words=Mathematik/dsp=zamn/nh=2';
+            $URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
+            $content = '<h4>' . $this->pi_getLL('collections') . '</h4>' . $URLContent;
+            $content = str_replace('show.html', 'historische-mathematik/nachlaesse/', $content);
+            $content = preg_replace('/<\/OL>...<OL>/', '</ol><h4>Personal</h4><ol>', $content);
+            $content = str_replace('?t_show', '?L=' . $GLOBALS['TSFE']->sys_language_uid . '&t_show', $content);
+        }
 
-		return $this->pi_wrapInBaseClass($content);
-	}
+        return $this->pi_wrapInBaseClass($content);
+    }
 
 }
 
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php']);
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php']);
 }

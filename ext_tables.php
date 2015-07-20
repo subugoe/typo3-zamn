@@ -1,26 +1,31 @@
 <?php
-if (!defined('TYPO3_MODE')) die ('Access denied.');
+if (!defined('TYPO3_MODE')) {
+    die ('Access denied.');
+}
 $TCA["tx_zamn"] = array(
-	"ctrl" => array(
-		'title' => 'LLL:EXT:zamn/locallang_db.xml:tx_zamn',
-		'label' => 'uid',
-		'tstamp' => 'tstamp',
-		'crdate' => 'crdate',
-		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY crdate",
-		'delete' => 'deleted',
-		'enablecolumns' => array(
-			'disabled' => 'hidden',
-		),
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'icon_tx_zamn.gif',
-	),
-	"feInterface" => array(
-		"fe_admin_fieldList" => "hidden",
-	)
+    "ctrl" => array(
+        'title' => 'LLL:EXT:zamn/locallang_db.xml:tx_zamn',
+        'label' => 'uid',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'default_sortby' => "ORDER BY crdate",
+        'delete' => 'deleted',
+        'enablecolumns' => array(
+            'disabled' => 'hidden',
+        ),
+        'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/tca.php',
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'icon_tx_zamn.gif',
+    ),
+    "feInterface" => array(
+        "fe_admin_fieldList" => "hidden",
+    )
 );
 
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:zamn/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY . '_pi1'), 'list_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array(
+    'LLL:EXT:zamn/locallang_db.xml:tt_content.list_type_pi1',
+    $_EXTKEY . '_pi1'
+), 'list_type');
