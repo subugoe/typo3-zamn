@@ -62,25 +62,42 @@ class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
         $this->pi_loadLL();
         $this->pi_USER_INT_obj = true;
 
-        //show item
         if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('reccheck')) {
-            $itemUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
-            $itemUrl .= '&' . $_SERVER['QUERY_STRING'];
-            $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($itemUrl);
-            $start = strpos($content, '<p');
-            $content = substr($content, $start);
-            $content = strip_tags($content, '<p><div><a><table><tr><td>');
+            $content = $this->detailView();
         } else {
-            //show list
-            $listUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige.pl/db=zamn/tag=SSW/words=Mathematik/dsp=zamn/nh=2';
-            $URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
-            $content = '<h4>' . $this->pi_getLL('collections') . '</h4>' . $URLContent;
-            $content = str_replace('show.html', 'historische-mathematik/nachlaesse/', $content);
-            $content = preg_replace('/<\/OL>...<OL>/', '</ol><h4>Personal</h4><ol>', $content);
-            $content = str_replace('?t_show', '?L=' . $GLOBALS['TSFE']->sys_language_uid . '&t_show', $content);
+            $content = $this->listView();
         }
 
         return $this->pi_wrapInBaseClass($content);
+    }
+
+    /**
+     * @return string
+     */
+    protected function listView()
+    {
+        $listUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige1.pl/db=zamn/tag=SSW/words=Mathematik/dsp=title/nh=2';
+        $URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
+        $content = '<h4>' . $this->pi_getLL('collections') . '</h4>' . $URLContent;
+        $page = $this->pi_getPageLink($GLOBALS['TSFE']->id);
+        $content = str_replace('cgi-bin/ssgfi/zdmn.pl', $page, $content);
+        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>Personal</h4><ol>', $content);
+        $content = str_replace('?t_show', '?L=' . $GLOBALS['TSFE']->sys_language_uid . '&t_show', $content);
+        return $content;
+    }
+
+    /**
+     * @return string
+     */
+    protected function detailView()
+    {
+        $itemUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
+        $itemUrl .= '&' . $_SERVER['QUERY_STRING'];
+        $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($itemUrl);
+        $start = strpos($content, '<p');
+        $content = substr($content, $start);
+        $content = strip_tags($content, '<p><div><a><table><tr><td>');
+        return $content;
     }
 
 }
