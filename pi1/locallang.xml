@@ -7,13 +7,15 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="collections">Collections</label>
+			<label index="persons">Persons</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="collections">Sammlungen</label>
+			<label index="persons">Personen</label>
 		</languageKey>
 		<languageKey index="en" type="array">
 			<label index="collections">Collections</label>
+			<label index="persons">Persons</label>
 		</languageKey>
 	</data>
-
 </T3locallang>

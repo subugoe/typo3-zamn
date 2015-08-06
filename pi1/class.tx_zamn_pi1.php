@@ -81,7 +81,7 @@ class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
         $content = '<h4>' . $this->pi_getLL('collections') . '</h4>' . $URLContent;
         $page = $this->pi_getPageLink($GLOBALS['TSFE']->id);
         $content = str_replace('cgi-bin/ssgfi/zdmn.pl', $page, $content);
-        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>Personal</h4><ol>', $content);
+        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>' .$this->pi_getLL('persons') . '</h4><ol>', $content);
         $content = str_replace('?t_show', '?L=' . $GLOBALS['TSFE']->sys_language_uid . '&t_show', $content);
         return $content;
     }
