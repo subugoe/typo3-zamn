@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,7 +30,6 @@
  */
 class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
 {
-
     /**
      * @var string
      */
@@ -49,10 +51,11 @@ class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
     public $pi_checkCHash = false;
 
     /**
-     * The main method of the PlugIn
+     * The main method of the PlugIn.
      *
      * @param string $content The PlugIn content
-     * @param array $conf The PlugIn configuration
+     * @param array  $conf    The PlugIn configuration
+     *
      * @return string The content that is displayed on the website
      */
     public function main($content, $conf)
@@ -74,35 +77,35 @@ class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
     /**
      * @return string
      */
-    protected function listView()
+    protected function listView(): string
     {
         $listUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige1.pl/db=zamn/tag=SSW/words=Mathematik/dsp=title/nh=2';
         $URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
-        $content = '<h4>' . $this->pi_getLL('collections') . '</h4>' . $URLContent;
+        $content = '<h4>'.$this->pi_getLL('collections').'</h4>'.$URLContent;
         $page = $this->pi_getPageLink($GLOBALS['TSFE']->id);
         $content = str_replace('cgi-bin/ssgfi/zdmn.pl', $page, $content);
-        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>' .$this->pi_getLL('persons') . '</h4><ol>', $content);
-        $content = str_replace('?t_show', '?L=' . $GLOBALS['TSFE']->sys_language_uid . '&t_show', $content);
+        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>'.$this->pi_getLL('persons').'</h4><ol>', $content);
+        $content = str_replace('?t_show', '?L='.$GLOBALS['TSFE']->sys_language_uid.'&t_show', $content);
+
         return $content;
     }
 
     /**
      * @return string
      */
-    protected function detailView()
+    protected function detailView(): string
     {
         $itemUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/zamn.pl?nh=';
-        $itemUrl .= '&' . $_SERVER['QUERY_STRING'];
+        $itemUrl .= '&'.$_SERVER['QUERY_STRING'];
         $content = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($itemUrl);
         $start = strpos($content, '<p');
         $content = substr($content, $start);
         $content = strip_tags($content, '<p><div><a><table><tr><td>');
+
         return $content;
     }
-
 }
 
-
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php']) {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php']);
+    include_once $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/zamn/pi1/class.tx_zamn_pi1.php'];
 }
