@@ -1,3 +1,7 @@
 <h2>{hans.title}</h2>
 
+<f:for each="{hans.kalliope}" as="kalliope">
+    <p>Kalliope: <a href="http://kalliope.staatsbibliothek-berlin.de/de/ead?ead.id={kalliope}">{kalliope}</a></p>
+</f:for>
+
 <p>{hans.content -> f:format.nl2br()}</p>

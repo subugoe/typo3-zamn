@@ -28,6 +28,7 @@ class HansRepository
             ->fetchAll()[0];
 
         $dataset['content'] = trim($dataset['content']);
+        $dataset['kalliope'] = unserialize($dataset['kalliope']);
 
         return $dataset;
     }
