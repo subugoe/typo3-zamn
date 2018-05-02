@@ -6,22 +6,17 @@ if (!defined('TYPO3_MODE')) {
 
 $nkwgok_data = [
     'ctrl' => [
-        'title' => 'LLL:EXT:nkwgok/Resources/Private/Language/locallang_db.xml:tx_nkwgok_data',
-        'label' => 'notation',
-        'label_alt' => 'descr',
-        'label_alt_force' => 1,
-        'tstamp' => 'tstamp',
-        'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
-        'default_sortby' => 'ORDER BY crdate',
+        'title' => 'Hans',
+        'label' => 'Nachlass',
+        'default_sortby' => 'ORDER BY uid',
         'iconfile' => \TYPO3\CMS\Core\Utility\PathUtility::getAbsoluteWebPath($_EXTKEY).'Resources/Public/Images/ext_icon.gif',
-        'searchFields' => 'descr, descr_en, notation',
+        'searchFields' => 'title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'notation,search,ppn,descr,descr_en,parent,hierarchy,hitcount,tags',
+        'showRecordFieldList' => 'title,content',
     ],
     'columns' => [
-        'id' => [
+        'uid' => [
             'label' => 'id',
             'config' => [
                 'type' => 'passthrough',
@@ -29,7 +24,7 @@ $nkwgok_data = [
         ],
         'hans_id' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:nkwgok/Resources/Private/Language/locallang_db.xml:tx_nkwgok_data.ppn',
+            'label' => 'Hans ID',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -38,7 +33,7 @@ $nkwgok_data = [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:nkwgok/Resources/Private/Language/locallang_db.xml:tx_nkwgok_data.notation',
+            'label' => 'Nachlass',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -47,7 +42,7 @@ $nkwgok_data = [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'hans_id, title, search, descr, descr_en, descr_alternate, descr_alternate_en, parent, hierarchy, childcount, hitcount, totalhitcount, tags, type'],
+        '0' => ['showitem' => 'hans_id, title, content, kalliope'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

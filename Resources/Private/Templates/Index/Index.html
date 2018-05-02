@@ -1,0 +1,7 @@
+<ul>
+<f:for each="{data}" as="hans">
+    <li>
+        <f:link.action action="detail" arguments="{id: hans.uid}">{hans.title}</f:link.action>
+    </li>
+</f:for>
+</ul>
