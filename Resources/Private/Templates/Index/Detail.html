@@ -1,7 +1,11 @@
 <h2>{hans.title}</h2>
 
-<f:for each="{hans.kalliope}" as="kalliope">
-    <p>Kalliope: <a href="http://kalliope.staatsbibliothek-berlin.de/de/ead?ead.id={kalliope}">{kalliope}</a></p>
-</f:for>
-
+<f:if condition="{hans.kalliope -> f:count()} > 0">
+    <h3>Kalliope</h3>
+    <ul>
+        <f:for each="{hans.kalliope}" as="kalliope">
+            <li><a href="http://kalliope.staatsbibliothek-berlin.de/de/ead?ead.id={kalliope}">{kalliope}</a></li>
+        </f:for>
+    </ul>
+</f:if>
 <p>{hans.content -> f:format.nl2br()}</p>

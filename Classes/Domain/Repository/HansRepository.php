@@ -17,7 +17,7 @@ class HansRepository
             ->fetchAll();
     }
 
-    public function findByUid(int $uid)
+    public function findByUid(int $uid): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_zamn_domain_model_hans');
 
