@@ -1,19 +1,23 @@
-<h2><f:translate key="collections" /></h2>
+<f:layout name="Default" />
 
-<ul>
-    <f:for each="{collections}" as="collection">
+<f:section name="main">
+    <h2><f:translate key="collections" /></h2>
+
+    <ol>
+        <f:for each="{collections}" as="collection">
+            <li>
+                <f:link.action action="detail" arguments="{id: collection.uid}">{collection.title}</f:link.action>
+            </li>
+        </f:for>
+    </ol>
+
+    <h2><f:translate key="persons" /></h2>
+
+    <ol>
+    <f:for each="{personal}" as="hans">
         <li>
-            <f:link.action action="detail" arguments="{id: collection.uid}">{collection.title}</f:link.action>
+            <f:link.action action="detail" arguments="{id: hans.uid}">{hans.title}</f:link.action>
         </li>
     </f:for>
-</ul>
-
-<h2><f:translate key="persons" /></h2>
-
-<ul>
-<f:for each="{personal}" as="hans">
-    <li>
-        <f:link.action action="detail" arguments="{id: hans.uid}">{hans.title}</f:link.action>
-    </li>
-</f:for>
-</ul>
+    </ol>
+</f:section>

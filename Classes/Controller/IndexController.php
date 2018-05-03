@@ -3,6 +3,7 @@
 namespace Subugoe\Zamn\Controller;
 
 use Subugoe\Zamn\Domain\Repository\HansRepository;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class IndexController extends ActionController
@@ -11,6 +12,13 @@ class IndexController extends ActionController
      * @var HansRepository
      */
     private $hansRepository;
+
+    public function initializeAction()
+    {
+        parent::initializeAction();
+        $pageRenderer = $this->objectManager->get(PageRenderer::class);
+        $pageRenderer->addJsFile('EXT:zamn/Resources/Public/JavaScript/Zamn.js');
+    }
 
     public function __construct(HansRepository $hansRepository)
     {
