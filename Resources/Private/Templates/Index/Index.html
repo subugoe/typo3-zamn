@@ -1,5 +1,17 @@
+<h2><f:translate key="collections" /></h2>
+
 <ul>
-<f:for each="{data}" as="hans">
+    <f:for each="{collections}" as="collection">
+        <li>
+            <f:link.action action="detail" arguments="{id: collection.uid}">{collection.title}</f:link.action>
+        </li>
+    </f:for>
+</ul>
+
+<h2><f:translate key="persons" /></h2>
+
+<ul>
+<f:for each="{personal}" as="hans">
     <li>
         <f:link.action action="detail" arguments="{id: hans.uid}">{hans.title}</f:link.action>
     </li>

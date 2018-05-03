@@ -20,7 +20,12 @@ class IndexController extends ActionController
 
     public function indexAction()
     {
-        $this->view->assign('data', $this->hansRepository->findAll());
+        $this->view->assignMultiple(
+            [
+                'personal' => $this->hansRepository->findAll(),
+                'collections' => $this->hansRepository->findAll(true),
+            ]
+        );
     }
 
     public function detailAction()

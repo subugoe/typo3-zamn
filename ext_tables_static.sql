@@ -1,4 +1,4 @@
-INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope) VALUES (1, 78028, 'Klein, Felix [1849-1925] und Müller, Conrad [1878-1953]', '
+INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope, collection) VALUES (1, 78028, 'Klein, Felix [1849-1925] und Müller, Conrad [1878-1953]', '
 
 
 
@@ -51,8 +51,8 @@ Verlagsarchiv Teubner
   Cod. Ms. TeubnerVerlagsarchiv TeubnerB. G. Teubner <Leipzig>
 
 
-', 'a:0:{}');
-INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope) VALUES (2, 73328, 'Staudt, Karl Georg Christian von [1798-1867] und Koenigsberger, Leo [1837-1921] und Minkowski, Hermann [1864-1909] und Prinz, Wilhelm [-1919] und Hurwitz, Adolf [1859-1919] und Goeb, Margarethe [1892-1962]', '
+', 'a:0:{}', 1);
+INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope, collection) VALUES (2, 73328, 'Staudt, Karl Georg Christian von [1798-1867] und Koenigsberger, Leo [1837-1921] und Minkowski, Hermann [1864-1909] und Prinz, Wilhelm [-1919] und Hurwitz, Adolf [1859-1919] und Goeb, Margarethe [1892-1962]', '
 
 
 
@@ -122,9 +122,8 @@ Mathematiker-Archiv
   Cod. Ms. Math.-Arch.Mathematiker-Archiv
 
 
-', 'a:0:{}');
-INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope) VALUES (3, 15740, 'Historia Mathematica : international journal of the history of mathematics
- * * *', '
+', 'a:0:{}', 1);
+INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope, collection) VALUES (3, 15740, 'Historia Mathematica : international journal of the history of mathematics', '
 
 
 
@@ -155,7 +154,7 @@ Archiv der Zeitschrift Historia Mathematica
   Cod. Ms. Historia MathematicaArchiv der Zeitschrift Historia MathematicaHistoria Mathematica : international journal of the history of mathematics
 
 
-', 'a:0:{}');
+', 'a:0:{}', 1);
 INSERT INTO tx_zamn_domain_model_hans (uid, hans_id, title, content, kalliope) VALUES (4, 123932, 'Artin, Emil [1898-1962]', '
 
 

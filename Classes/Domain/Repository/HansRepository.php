@@ -7,12 +7,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HansRepository
 {
-    public function findAll(): array
+    public function findAll(bool $collections = false): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_zamn_domain_model_hans');
 
         return $queryBuilder->select('*')
             ->from('tx_zamn_domain_model_hans')
+            ->where($queryBuilder->expr()->eq('collection', (int) $collections))
             ->execute()
             ->fetchAll();
     }
