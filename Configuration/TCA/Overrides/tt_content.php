@@ -3,7 +3,9 @@
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin([
     'LLL:EXT:zamn/locallang_db.xml:tt_content.list_type_pi1',
     'zamn_pi1',
-], 'list_type');
+    ],
+    'list_type',
+    'zamn');
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Subugoe.zamn',
