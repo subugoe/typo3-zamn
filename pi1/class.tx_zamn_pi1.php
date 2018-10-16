@@ -79,13 +79,20 @@ class tx_zamn_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
      */
     protected function listView(): string
     {
+        $language = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Context\Context::class)->getAspect('language');
+
         $listUrl = 'http://ssgfi.sub.uni-goettingen.de/cgi-bin/ssgfi/anzeige1.pl/db=zamn/tag=SSW/words=Mathematik/dsp=title/nh=2';
         $URLContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getUrl($listUrl);
         $content = '<h4>'.$this->pi_getLL('collections').'</h4>'.$URLContent;
         $page = $this->pi_getPageLink($GLOBALS['TSFE']->id);
-        $content = str_replace('cgi-bin/ssgfi/zdmn.pl', $page, $content);
-        $content = str_replace('&nbsp;* * *</LI>', '</ol><h4>'.$this->pi_getLL('persons').'</h4><ol>', $content);
-        $content = str_replace('?t_show', '?L='.$GLOBALS['TSFE']->sys_language_uid.'&t_show', $content);
+
+        $replacer = [
+            'cgi-bin/ssgfi/zdmn.pl' => $page,
+            '&nbsp;* * *</LI>' => sprintf('</ol><h4>%s</h4><ol>', $this->pi_getLL('persons')),
+            '?t_show' => sprintf('?L='%'&t_show', $language),
+        ];
+
+        $content = strtr($content, $replacer);
 
         return $content;
     }
