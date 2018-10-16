@@ -19,11 +19,11 @@ $EM_CONF[$_EXTKEY] = [
     'clearCacheOnLoad' => 1,
     'lockType' => '',
     'author_company' => '',
-    'version' => '4.0.0',
+    'version' => '4.0.3',
     'constraints' => [
         'depends' => [
             'php' => '7.1.0-7.2.99',
-            'typo3' => '8.7.0-9.2.99',
+            'typo3' => '8.7.0-9.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],
